@@ -12,7 +12,14 @@ const stringify = (params) => {
 };
 
 export function getNews(params = {}) {
-  const url = 'https://newsapi.org/v2/everything?' + stringify(params);
+  // const baseURL = 'https://newsapi.org/v2/everything?';
+  const baseURL = 'https://news.kongkx.com/everything?';
+  const url =
+    baseURL +
+    stringify({
+      ...params,
+      language: 'zh',
+    });
   console.log(url);
   return fetch(url, {
     headers: {
