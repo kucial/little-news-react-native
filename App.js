@@ -158,7 +158,7 @@ const App = () => {
               );
             }}
             ListEmptyComponent={() => {
-              if (pageMeta.fetching) {
+              if (pageMeta.fetching || pageMeta.fetchError) {
                 return null;
               }
               return (
