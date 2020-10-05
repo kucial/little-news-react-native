@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import {
   SafeAreaView,
   StyleSheet,
@@ -23,6 +24,9 @@ const initialPageMeta = {
   fetchError: null,
 };
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   const [isReady, setIsReady] = useState(false);
   const [articles, setArticles] = useState([]);
   const [search, setSearch] = useState('');
