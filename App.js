@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {
   SafeAreaView,
@@ -27,6 +27,7 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+  const listRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const [articles, setArticles] = useState([]);
   const [search, setSearch] = useState('');
@@ -105,6 +106,12 @@ const App = () => {
     if (!isReady) {
       return;
     }
+    if (listRef.current) {
+      listRef.current.scrollToOffset({
+        offset: 0,
+        animated: false,
+      });
+    }
     handleRefresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, isReady]);
@@ -143,6 +150,7 @@ const App = () => {
         </View>
         <View style={{flex: 1}}>
           <FlatList
+            ref={listRef}
             keyExtractor={(item, index) => item.url}
             data={articles}
             refreshing={pageMeta.refreshing}
